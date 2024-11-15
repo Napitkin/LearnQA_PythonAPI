@@ -6,6 +6,7 @@ from LearnQA_Python_API.lib.my_requests import MyRequests
 
 
 @allure.epic("Authorization cases")
+@allure.feature("User Authorized")
 class TestUserAuth(BaseCase):
     exclude_params = [
         ("no_cookie"),

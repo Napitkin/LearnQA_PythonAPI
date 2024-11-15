@@ -1,9 +1,15 @@
+import allure
+
 from LearnQA_Python_API.lib.base_case import BaseCase
 from LearnQA_Python_API.lib.assertions import Assertions
 from LearnQA_Python_API.lib.my_requests import MyRequests
 
 
+@allure.epic("User Management")
+@allure.feature("User Information")
 class TestUserGet(BaseCase):
+
+    @allure.description("Получение информации не авторизованным пользователем")
     def test_get_user_details_not_auth(self):
         response = MyRequests.get("/user/2")
 
@@ -12,6 +18,7 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_not_key(response, "firstName")
         Assertions.assert_json_has_not_key(response, "lastName")
 
+    @allure.description("Получение детальной информации пользователем")
     def test_get_user_details_auth_as_same_user(self):
         data = {
             "email": "vinkotov@example.com",
@@ -33,6 +40,7 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_keys(response2, expected_fields)
 
     # EX16: Запрос данных другого пользователя
+    @allure.description("Получение информации авторизовавшись другим пользователем")
     def test_get_user_details_auth_as_other_user(self):
         # Авторизация первым пользователем
         data = {

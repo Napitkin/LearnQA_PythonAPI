@@ -1,10 +1,16 @@
 import time
+import allure
 
 from LearnQA_Python_API.lib.base_case import BaseCase
 from LearnQA_Python_API.lib.assertions import Assertions
 from LearnQA_Python_API.lib.my_requests import MyRequests
 
+
+@allure.epic("User Management")
+@allure.feature("User Deletion")
 class TestUserDelete(BaseCase):
+
+    @allure.description("Удаление пользователя с ID=2")
     def test_delete_user_with_id_2(self):
         data = {
             "email": "vinkotov@example.com",
@@ -30,6 +36,7 @@ class TestUserDelete(BaseCase):
             "Unexpected response when trying to delete user with ID 2"
 
 
+    @allure.description("Создание пользователя, авторизоваться под ним и удалить. Затем получить его данные под ID")
     def test_delete_just_created_user(self):
         # Регистрация нового пользователя
         register_data = self.prepare_registration_data()
@@ -73,7 +80,9 @@ class TestUserDelete(BaseCase):
         assert response4.content.decode("utf-8") == "User not found", "Unexpected response content for deleted user"
 
 
+    @allure.description("Попытка удалить пользователя, авторизовавшись под другим пользователем")
     def test_delete_user_authorized_as_another_user(self):
+        # Регистрация двух пользователей
         # Создание первого пользователя
         register_data1 = self.prepare_registration_data()
         response1 = MyRequests.post("/user/", data=register_data1)

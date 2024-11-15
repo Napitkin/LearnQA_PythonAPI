@@ -1,9 +1,14 @@
+import allure
 from LearnQA_Python_API.lib.base_case import BaseCase
 from LearnQA_Python_API.lib.assertions import Assertions
 from LearnQA_Python_API.lib.my_requests import MyRequests
 
 
+@allure.epic("User Management")
+@allure.feature("User Edit")
 class TestUserEdit(BaseCase):
+
+    @allure.description("Регистрация, авторизация и изменение имени пользователя")
     def test_user_edit_just_created_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()

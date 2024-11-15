@@ -1,7 +1,7 @@
 import requests
 import allure
 from LearnQA_Python_API.lib.logger import Logger
-from LearnQA_Python_API.environment import ENV_OBJECT
+from environment import ENV_OBJECT
 
 
 class MyRequests():
